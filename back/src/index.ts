@@ -7,8 +7,8 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // GET /hello endpoint
-app.get('/hello', (req: Request, res: Response) => {
-  res.send('hello');
+app.get('/', (req: Request, res: Response) => {
+  res.send('hello asldkjas');
 });
 
 // Start server
