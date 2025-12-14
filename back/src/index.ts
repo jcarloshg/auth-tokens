@@ -1,15 +1,18 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+// Import route handlers
+import { healthRoutes } from './presentation/routes/health.routes';
+import { authRoutes } from './presentation/routes/auth.routes';
 
+// Initialize Express app
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
 
-// GET /hello endpoint
-app.get('/', (req: Request, res: Response) => {
-  res.send('hello asldkjas');
-});
+// Routes
+healthRoutes(app);
+authRoutes(app);
 
 // Start server
 app.listen(PORT, () => {
