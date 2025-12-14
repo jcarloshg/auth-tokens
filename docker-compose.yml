@@ -1,7 +1,7 @@
 services:
   backend:
     build:
-      context: .
+      context: ./back
       dockerfile: Dockerfile
     ports:
       - 3000:3000
@@ -10,24 +10,20 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=123456
       - POSTGRES_DB=data_base_name
-    depends_on:
-      - db-sql
+    # depends_on:
+    #   - db-sql
 
-  db-sql:
-    image: postgres:15.13
-    ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=123456
-      - POSTGRES_DB=data_base_name
-    volumes:
-      - database-volume:/var/lib/postgresql/data
+  # db-sql:
+  #   image: postgres:15.13
+  #   ports:
+  #     - 5432:5432
+  #   environment:
+  #     - POSTGRES_USER=admin
+  #     - POSTGRES_PASSWORD=123456
+  #     - POSTGRES_DB=data_base_name
+  #   volumes:
+  #     - database-volume:/var/lib/postgresql/data
 
 volumes:
   database-volume:
     driver: local
-    driver_opts:
-      type: none
-      device: ./../database-volume
-      o: bind
