@@ -1,7 +1,7 @@
 import express from 'express';
 // Import route handlers
-import { healthRoutes } from './presentation/routes/health.routes';
-import { authRoutes } from './presentation/routes/auth.routes';
+import { healthRoutes } from '@/presentation/routes/health.routes';
+import { authRoutes } from '@/presentation/routes/auth.routes';
 
 // Initialize Express app
 const app = express();
