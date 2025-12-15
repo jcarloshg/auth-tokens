@@ -2,7 +2,7 @@ import { CustomResponse } from "./CustomResponse";
 
 export type ErrosObject = { [key: string]: string };
 
-export class ValidationError extends Error {
+export class CustomValidationError extends Error {
 
     private _errosObject: ErrosObject;
 

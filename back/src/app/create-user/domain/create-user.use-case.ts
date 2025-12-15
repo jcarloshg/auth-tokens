@@ -3,7 +3,7 @@ import { UserModel } from "./models/User.model";
 import { UserRequest } from "./models/UserRequest.model";
 import { UserRepoModel } from "@/app/shared/domain/repos/User/User.modelRepo";
 import { UserModelRepo } from "@/app/shared/domain/repos/User/User.repo";
-import { ValidationError } from "@/app/shared/domain/models/ValidationError";
+import { CustomValidationError } from "@/app/shared/domain/models/ValidationError";
 
 
 export class CreateUserUseCase {
@@ -38,7 +38,7 @@ export class CreateUserUseCase {
 
         } catch (error) {
             console.error("Error in CreateUserUseCase:", error);
-            if (error instanceof ValidationError) {
+            if (error instanceof CustomValidationError) {
                 return error.getCustomResponse();
             }
             return CustomResponse.internalError();

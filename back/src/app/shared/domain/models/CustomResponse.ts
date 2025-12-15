@@ -42,6 +42,14 @@ export class CustomResponse {
         });
     }
 
+    // error 401
+    static unauthorized(message: string = "Unauthorized"): CustomResponse {
+        return new CustomResponse({
+            statusCode: 401,
+            message
+        });
+    }
+
     // error 404
     static notFound(message: string = "Not Found"): CustomResponse {
         return new CustomResponse({

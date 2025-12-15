@@ -1,6 +1,5 @@
 import { z } from 'zod';
-import { UserRole } from './User.model';
-import { ValidationError } from '@/app/shared/domain/models/ValidationError';
+import { CustomValidationError } from '@/app/shared/domain/models/ValidationError';
 
 const userSchema = z.object({
     uuid: z.uuid(),
@@ -32,7 +31,7 @@ export class UserRequest {
             errorMap.forEach((value, key) => {
                 errosObject[key] = value.join(', ');
             });
-            throw new ValidationError("Invalid user data", errosObject);
+            throw new CustomValidationError("Invalid user data", errosObject);
         }
         this.props = parsed.data;
     }
