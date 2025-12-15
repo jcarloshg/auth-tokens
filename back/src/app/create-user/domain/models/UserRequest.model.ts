@@ -1,11 +1,12 @@
 import { z } from 'zod';
+import { UserRole } from './User.model';
 
 const userSchema = z.object({
     uuid: z.uuid(),
     fullname: z.string().min(1).max(100),
-    email: z.email(),
+    email: z.string().email(),
     hashedPass: z.string().min(8),
-    role: z.string().min(1).max(50),
+    role: z.enum(["ADMIN", "AGENT", "CUSTOMER"]),
 });
 
 export type UserRequestProps = z.infer<typeof userSchema>;
