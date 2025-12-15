@@ -25,7 +25,14 @@ describe('User.model.test.ts', () => {
 
     it('should create a UserModel from UserRequest', () => {
         // Arrange
-        const userRequest = new UserRequest({ ...props });
+        const userRequestData = {
+            uuid: props.uuid,
+            fullname: props.fullname,
+            email: props.email,
+            pass: props.hashedPass, // simulate input password
+            role: props.role,
+        };
+        const userRequest = new UserRequest(userRequestData);
         // Act
         const user = UserModel.fromUserRequest(userRequest);
         // Assert
