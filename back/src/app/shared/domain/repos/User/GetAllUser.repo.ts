@@ -1,7 +1,7 @@
-import { UserRepoModel } from "./User.modelRepo";
+import { UserRepoModelProps } from "./User.modelRepo";
 
 export class GetAllUserRepo {
-    async execute(): Promise<UserRepoModel[]> {
+    async execute(): Promise<UserRepoModelProps[]> {
         throw new Error("Method to get all not implemented.");
     }
 }

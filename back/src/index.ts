@@ -2,6 +2,7 @@ import express from 'express';
 // Import route handlers
 import { healthRoutes } from '@/presentation/routes/health.routes';
 import { authRoutes } from '@/presentation/routes/auth.routes';
+import { usersRoutes } from './presentation/routes/users.routes';
 
 // Initialize Express app
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 // Routes
 healthRoutes(app);
 authRoutes(app);
+usersRoutes(app);
 
 // Start server
 app.listen(PORT, () => {

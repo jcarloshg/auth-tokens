@@ -19,7 +19,7 @@ export class UserModel {
             uuid: userRequest.props.uuid,
             fullname: userRequest.props.fullname,
             email: userRequest.props.email,
-            hashedPass: userRequest.props.hashedPass,
+            hashedPass: userRequest.props.pass,
             role: userRequest.props.role as UserRole,
         });
     }

@@ -3,7 +3,7 @@ import { DeleteUserRepo } from "./DeleteUser.repo";
 import { GetAllUserRepo } from "./GetAllUser.repo";
 import { GetByIdUserRepo } from "./GetByIdUser.repo";
 import { UpdateUserRepo } from "./UpdateUser.repo";
-import { UserRepoModel } from "./User.modelRepo";
+import { UserRepoModelProps } from "./User.modelRepo";
 
 export class UserModelRepo {
 
@@ -15,7 +15,7 @@ export class UserModelRepo {
         private readonly deleteUserRepo: DeleteUserRepo,
     ) { }
 
-    async create(userRepoModel: UserRepoModel): Promise<UserRepoModel | null> {
+    async create(userRepoModel: UserRepoModelProps): Promise<UserRepoModelProps | null> {
         try {
             return await this.createUserRepo.execute(userRepoModel);
         } catch (error) {
@@ -24,7 +24,7 @@ export class UserModelRepo {
         }
     }
 
-    async getAll(): Promise<UserRepoModel[] | null> {
+    async getAll(): Promise<UserRepoModelProps[] | null> {
         try {
             return await this.getAllUserRepo.execute();
         } catch (error) {
@@ -33,7 +33,7 @@ export class UserModelRepo {
         }
     }
 
-    async getById(id: string): Promise<UserRepoModel | null> {
+    async getById(id: string): Promise<UserRepoModelProps | null> {
         try {
             return await this.getByIdUserRepo.execute(id);
         } catch (error) {
@@ -42,7 +42,7 @@ export class UserModelRepo {
         }
     }
 
-    async update(user: UserRepoModel): Promise<UserRepoModel | null> {
+    async update(user: UserRepoModelProps): Promise<UserRepoModelProps | null> {
         try {
             return await this.updateUserRepo.execute(user);
         } catch (error) {
