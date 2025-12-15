@@ -23,6 +23,20 @@ export class UserModel {
             role: userRequest.props.role as UserRole,
         });
     }
+
+    public applyHashToPass() {
+        // TODO: Implement password hashing logic here
+        // Placeholder for hashing logic
+        this.props.hashedPass = `hashed_${this.props.hashedPass}`;
+    }
+
+    public applyUnHashToPass() {
+        // TODO: Implement password unhashing logic here
+        // Placeholder for unhashing logic
+        if (this.props.hashedPass.startsWith('hashed_')) {
+            this.props.hashedPass = this.props.hashedPass.slice(7);
+        }
+    }
 }
 
 
