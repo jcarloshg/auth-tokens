@@ -20,7 +20,8 @@ export class JwtWebToken implements JwtService {
             payload,
             this.ACCESS_SECRET,
             {
-                expiresIn: "15m",
+                algorithm: "HS256",
+                expiresIn: JwtService.ACCESS_TOKEN_EXPIRES,
             }
         );
         const refreshToken = jwt.sign(
@@ -29,12 +30,15 @@ export class JwtWebToken implements JwtService {
             },
             this.REFRESH_SECRET,
             {
-                expiresIn: JwtService.EXPIRES_IN,
+                algorithm: "HS256",
+                expiresIn: JwtService.REFRESH_TOKEN_EXPIRES,
             }
         );
         const signResponse: SignResponse = {
             accessToken: accessToken,
             refreshToken: refreshToken,
+            tokenType: "Bearer",
+            expiresIn: JwtService.ACCESS_TOKEN_EXPIRES,
         };
         return signResponse;
     }

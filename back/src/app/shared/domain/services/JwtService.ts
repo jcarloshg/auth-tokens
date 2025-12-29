@@ -1,7 +1,9 @@
 export class JwtService {
 
+    // 15 minutes
+    public static ACCESS_TOKEN_EXPIRES: number = 15 * 60 * 1000;
     // 7 days
-    public static EXPIRES_IN: number = 7 * 24 * 60 * 60 * 1000
+    public static REFRESH_TOKEN_EXPIRES: number = 7 * 24 * 60 * 60 * 1000
 
     public sign(props: SingProps): SignResponse {
         throw new Error("Method [sign] not implemented.");
@@ -22,4 +24,6 @@ export interface SingProps {
 export interface SignResponse {
     accessToken: string;
     refreshToken: string;
+    tokenType: string;
+    expiresIn: number;
 }

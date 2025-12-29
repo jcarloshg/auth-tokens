@@ -40,11 +40,15 @@ export class SingInUseCase {
             const jwtWebTokenSignProps: JwtWebTokenSignProps = {
                 payload: userModel.props,
                 userId: userModel.props.uuid,
-            }
+            };
             const signResponse = this.jwtService.sign(jwtWebTokenSignProps);
             const SingInResponseProps: SingInResponseProps = {
-                accessToken: signResponse.accessToken,
-                refreshToken: signResponse.refreshToken,
+                auth: {
+                    accessToken: signResponse.accessToken,
+                    refreshToken: signResponse.refreshToken,
+                    tokenType: signResponse.tokenType,
+                    expiresIn: signResponse.expiresIn,
+                },
                 data: {
                     uuid: userModel.props.uuid,
                     fullname: userModel.props.fullname,
@@ -72,8 +76,12 @@ export interface SingInRequestProps {
 }
 
 export interface SingInResponseProps {
-    accessToken: string;
-    refreshToken: string;
+    auth: {
+        accessToken: string;
+        refreshToken: string;
+        tokenType: string;
+        expiresIn: number;
+    },
     data: {
         uuid: string;
         fullname: string;

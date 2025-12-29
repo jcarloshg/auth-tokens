@@ -14,17 +14,21 @@ export const LoginController = async (req: Request, res: Response) => {
     if (customResponseProps.data) {
         const data = customResponseProps.data as SingInResponseProps;
         const resToSend = {
-            accessToken: data.accessToken,
+            auth: {
+                accessToken: data.auth.accessToken,
+                tokenType: data.auth.tokenType,
+                expiresIn: data.auth.expiresIn,
+            },
             data: data.data,
         }
         res.cookie(
             "refreshToken",
-            data.refreshToken,
+            data.auth.refreshToken,
             {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
                 sameSite: "strict",
-                maxAge: JwtService.EXPIRES_IN,
+                maxAge: JwtService.ACCESS_TOKEN_EXPIRES,
             }
         );
         res.status(customResponseProps.statusCode).json(resToSend);
