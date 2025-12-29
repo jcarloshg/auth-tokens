@@ -9,7 +9,7 @@ export class JwtService {
         throw new Error("Method [sign] not implemented.");
     }
 
-    public verify(token: string): string {
+    public verifyRefreshToken(token: string): string {
         throw new Error("Method [verify] not implemented.");
     }
 

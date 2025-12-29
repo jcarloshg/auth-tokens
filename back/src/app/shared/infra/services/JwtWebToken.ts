@@ -43,9 +43,10 @@ export class JwtWebToken implements JwtService {
         return signResponse;
     }
 
-    public verify(token: string): string {
+    public verifyRefreshToken(refreshToken: string): string {
         const options: VerifyOptions = {};
-        // const jwtPayload: JwtPayload = jwt.verify(token, this.ACCESS_SECRET, options);
+        const jwtPayload = jwt.verify(refreshToken, this.REFRESH_SECRET, options);
+        console.log(`jwtPayload: ${jwtPayload}`);
         return "jwtPayload";
     }
 

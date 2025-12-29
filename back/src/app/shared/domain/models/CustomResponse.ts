@@ -25,7 +25,7 @@ export class CustomResponse {
         });
     }
 
-    // error 400
+    // 400 - error for bad request
     static badRequest(message: string = "Bad Request"): CustomResponse {
         return new CustomResponse({
             statusCode: 400,
@@ -33,7 +33,15 @@ export class CustomResponse {
         });
     }
 
-    // error for validation
+    // 401 - error for unauthorized
+    static forbidden(message: string = "Forbidden"): CustomResponse {
+        return new CustomResponse({
+            statusCode: 403,
+            message,
+        });
+    }
+
+    // 422 - error for validation
     static validationError(message: string = "Validation Error", data?: any): CustomResponse {
         return new CustomResponse({
             statusCode: 422,
