@@ -1,12 +1,17 @@
+// shared
 import { CustomResponse } from "@/app/shared/domain/models/CustomResponse";
-import { GetByEmailUserRepo } from "./repos/GetByEmailUser.repo";
-import { SingInRequest } from "./models/SingInRequest.model";
 import { CustomValidationError } from "@/app/shared/domain/models/ValidationError";
+import { JwtService } from "@/app/shared/domain/services/JwtService";
+// domain
+import { GetByEmailUserRepo } from "@/app/sing-in/domain/repos/GetByEmailUser.repo";
+import { SingInRequest } from "@/app/sing-in/domain/models/SingInRequest.model";
 import { UserModel } from "@/app/sing-in/domain/models/User.model";
+import { JwtWebTokenSignProps } from "@/app/shared/infra/services/JwtWebToken";
 
 export class SingInUseCase {
     constructor(
         private readonly getByEmailUserRepo: GetByEmailUserRepo,
+        private readonly jwtService: JwtService,
     ) { }
 
     async execute(req: SingInRequestProps): Promise<CustomResponse> {
@@ -32,9 +37,14 @@ export class SingInUseCase {
             }
 
             // 4. generate a token if valid
+            const jwtWebTokenSignProps: JwtWebTokenSignProps = {
+                payload: userModel.props,
+                userId: userModel.props.uuid,
+            }
+            const signResponse = this.jwtService.sign(jwtWebTokenSignProps);
             const SingInResponseProps: SingInResponseProps = {
-                token: "generated_jwt_token_placeholder",
-                refreshToken: "generated_refresh_token_placeholder",
+                accessToken: signResponse.accessToken,
+                refreshToken: signResponse.refreshToken,
                 data: {
                     uuid: userModel.props.uuid,
                     fullname: userModel.props.fullname,
@@ -43,15 +53,14 @@ export class SingInUseCase {
                 }
             }
 
-            // 5. generate refresh token if valid
-
             return CustomResponse.ok("Sign in successful", SingInResponseProps);
 
         } catch (error) {
             console.error("Error in CreateUserUseCase:", error);
-            if (error instanceof CustomValidationError) {
+
+            if (error instanceof CustomValidationError)
                 return error.getCustomResponse();
-            }
+
             return CustomResponse.internalError();
         }
     }
@@ -63,7 +72,7 @@ export interface SingInRequestProps {
 }
 
 export interface SingInResponseProps {
-    token: string;
+    accessToken: string;
     refreshToken: string;
     data: {
         uuid: string;
