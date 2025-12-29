@@ -1,0 +1,10 @@
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "uuid": "123e4567-e89b-12d3-a456-426614174003",
+    "fullname": "John Doe",
+    "email": "jhon1@email.com",
+    "role":"ADMIN",
+    "pass": "securepassword123"
+}
