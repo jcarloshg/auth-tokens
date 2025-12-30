@@ -2,6 +2,7 @@ import {
     JwtService,
     SingProps,
     SignResponse,
+    VerifyObject,
 } from "@/app/shared/domain/services/JwtService";
 import jwt, { SignOptions, VerifyOptions, JwtPayload } from "jsonwebtoken";
 
@@ -43,11 +44,11 @@ export class JwtWebToken implements JwtService {
         return signResponse;
     }
 
-    public verifyRefreshToken(refreshToken: string): string {
+    public verifyRefreshToken(refreshToken: string): VerifyObject {
         const options: VerifyOptions = {};
         const jwtPayload = jwt.verify(refreshToken, this.REFRESH_SECRET, options);
-        console.log(`jwtPayload: ${jwtPayload}`);
-        return "jwtPayload";
+        // console.log(`jwtPayload: ${jwtPayload}`);
+        return jwtPayload as VerifyObject;
     }
 
     public decode(token: string): null | { [key: string]: any } | string {

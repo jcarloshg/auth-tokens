@@ -9,7 +9,7 @@ export class JwtService {
         throw new Error("Method [sign] not implemented.");
     }
 
-    public verifyRefreshToken(token: string): string {
+    public verifyRefreshToken(token: string): VerifyObject {
         throw new Error("Method [verify] not implemented.");
     }
 
@@ -27,3 +27,9 @@ export interface SignResponse {
     tokenType: string;
     expiresIn: number;
 }
+
+export type VerifyObject = {
+    userId: string;
+    iat: number;
+    exp: number;
+};

@@ -1,4 +1,5 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
 // Import route handlers
 import { healthRoutes } from '@/presentation/routes/health.routes';
 import { authRoutes } from '@/presentation/routes/auth.routes';
@@ -10,6 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
+app.use(cookieParser())
 
 // Routes
 healthRoutes(app);

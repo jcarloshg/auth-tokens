@@ -28,7 +28,7 @@ export const LoginController = async (req: Request, res: Response) => {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
                 sameSite: "strict",
-                maxAge: JwtService.ACCESS_TOKEN_EXPIRES,
+                maxAge: JwtService.REFRESH_TOKEN_EXPIRES,
             }
         );
         res.status(customResponseProps.statusCode).json(resToSend);
